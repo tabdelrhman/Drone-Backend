@@ -8,9 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import com.musala.test.drones.entities.Drone;
-import com.musala.test.drones.entities.Medicine;
 import com.musala.test.drones.entities.Drone.State;
 import com.musala.test.drones.execption.DroneValidationException;
+import com.musala.test.drones.entities.Medicine;
 import com.musala.test.drones.repository.DroneRepository;
 import com.musala.test.drones.repository.MedicineRepository;
 
@@ -43,7 +43,7 @@ public class DroneServiceImpl implements DroneService {
 	}
 
 	@Override
-	public Drone loadMedicineToDrone(Long droneId, Long medicineId) throws Exception {
+	public Drone loadMedicineToDrone(Long droneId, Long medicineId) {
 
 		Drone drone = droneRepository.findById(droneId).get();
 		Medicine medicine = medicineRepository.findById(medicineId).get();
@@ -58,19 +58,17 @@ public class DroneServiceImpl implements DroneService {
 		return drone;
 	}
 
-	private void doDroneChecks(Drone drone, Medicine medicine) throws Exception {
+	private void doDroneChecks(Drone drone, Medicine medicine) {
 
 		if (drone.getWeightLimit() < medicine.getWeight()) {
 			throw new DroneValidationException("Error: Total medicines weight should be less than 500g.",
 					HttpStatus.BAD_REQUEST);
 		}
 		if (drone.getBatteryCapacity() <= 0) {
-			throw new DroneValidationException("Error: Battery Low for this drone.",
-					HttpStatus.BAD_REQUEST);
-			}
+			throw new DroneValidationException("Error: Battery Low for this drone.", HttpStatus.BAD_REQUEST);
+		}
 		if (!(drone.getState().ordinal() == 0 || drone.getState().ordinal() == 1)) {
-			throw new DroneValidationException("Error: Drone is not available at this moment",
-					HttpStatus.BAD_REQUEST);
+			throw new DroneValidationException("Error: Drone is not available at this moment", HttpStatus.BAD_REQUEST);
 		}
 	}
 

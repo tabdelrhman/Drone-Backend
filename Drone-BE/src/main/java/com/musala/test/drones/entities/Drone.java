@@ -9,8 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.lang.NonNull;
+
 
 @Entity
 public class Drone {
@@ -19,13 +22,16 @@ public class Drone {
 	 public enum State {IDLE, LOADING, LOADED, DELIVERING, DELIVERED, RETURNING};
 
 	 @Id @GeneratedValue
-	 @JsonIgnore
 	 private Long droneId;
 	 
+	 @NonNull
+	 @Size(min = 5,message = "Serial number should be more than 5 characters!")
 	 private String serialNumber;
 	 
+	 @Max(value = 100 , message = "Battery capacity should be below 100 percent!")
 	 private int batteryCapacity;
 	 
+	 @Max(value = 500 , message = "Weight limit should be 500g or less!")
 	 private double weightLimit;
 	 
 	 private Model model;

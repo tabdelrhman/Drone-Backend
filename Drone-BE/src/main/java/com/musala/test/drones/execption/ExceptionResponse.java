@@ -6,38 +6,37 @@ public class ExceptionResponse {
 
 	Date timeStamp;
 	String message;
-	String desc;
-	
-	public ExceptionResponse(Date timeStamp, String message, String desc) {
+    int statusCode;
+    
+    public ExceptionResponse() {}
+    
+    
+	public ExceptionResponse(Date timeStamp, String message, int statusCode) {
 		super();
 		this.timeStamp = timeStamp;
 		this.message = message;
-		this.desc = desc;
+		this.statusCode = statusCode;
 	}
-
+	
 	public Date getTimeStamp() {
 		return timeStamp;
 	}
-
 	public void setTimeStamp(Date timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-
 	public String getMessage() {
 		return message;
 	}
-
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
-	public String getDesc() {
-		return desc;
+	public int getStatusCode() {
+		return statusCode;
+	}
+	public void setStatus(int statusCode) {
+		this.statusCode = statusCode;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
 	
 	
 }

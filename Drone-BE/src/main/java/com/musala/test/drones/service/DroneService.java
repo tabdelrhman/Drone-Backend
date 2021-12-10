@@ -13,8 +13,7 @@ public interface DroneService {
 
 	Drone addNewDrone(Drone drone);
 	List<Drone> getAllDrones();
-	
-Drone loadMedicineToDrone(Long droneId, Long medicineId) throws Exception;
+	Drone loadMedicineToDrone(Long droneId, Long medicineId) throws Exception;
 	
 	Set<Medicine> getLoadedMedicine(Long droneId);
 	Set<Drone> getAvailableDronesForLoading();
